@@ -154,6 +154,6 @@ cv2.destroyAllWindows()
 # ---- 4. Batch-insert into MongoDB Atlas ----
 if angle_data:
     result = collection.insert_many(angle_data)
-    print(f"✅ Inserted {len(result.inserted_ids)} records (player={player_name}, side={HAND})")
+    print(f"Inserted {len(result.inserted_ids)} records (player={player_name}, side={HAND})")
 else:
-    print("⚠️ No data to insert")
+    print("No data to insert")
