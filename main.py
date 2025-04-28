@@ -11,10 +11,9 @@ import numpy as np
 
 # ---- 1. Load environment variables & connect to MongoDB Atlas ----
 load_dotenv()
-MONGODB_URI = os.getenv(
-    "MONGODB_URI",
-    "mongodb+srv://JonCheng:Jona0101@cluster0.nhjixga.mongodb.net/?retryWrites=true&w=majority"
-)
+MONGODB_URI = os.getenv("MONGODB_URI")
+if not MONGODB_URI:
+    raise RuntimeError("Please set MONGODB_URI in your .env file")
 client = MongoClient(MONGODB_URI)
 db     = client["pose_db_new"]
 
@@ -115,27 +114,27 @@ for video_file in video_files:
 
                 # Collect data
                 angle_data.append({
-                    "frame":           frame_counter,
-                    "side":            HAND,
-                    "shoulder_angle":  float(f"{angle_shoulder:.2f}"),
-                    "elbow_angle":     float(f"{angle_elbow:.2f}"),
-                    "wrist_angle":     float(f"{angle_wrist:.2f}"),
-                    "hip_angle":       float(f"{angle_hip:.2f}"),
-                    "knee_angle":      float(f"{angle_knee:.2f}"),
-                    "video_id":        video_id
+                    "frame":          frame_counter,
+                    "side":           HAND,
+                    "shoulder_angle": float(f"{angle_shoulder:.2f}"),
+                    "elbow_angle":    float(f"{angle_elbow:.2f}"),
+                    "wrist_angle":    float(f"{angle_wrist:.2f}"),
+                    "hip_angle":      float(f"{angle_hip:.2f}"),
+                    "knee_angle":     float(f"{angle_knee:.2f}"),
+                    "video_id":       video_id
                 })
 
                 # (Optional) Overlay angles on the frame
                 h, w, _ = frame.shape
                 cv2.putText(frame, f"Sh:{angle_shoulder:.1f}", (int(p_sh[0]*w), int(p_sh[1]*h)-30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
-                cv2.putText(frame, f"El:{angle_elbow:.1f}",    (int(p_el[0]*w), int(p_el[1]*h)-30),
+                cv2.putText(frame, f"El:{angle_elbow:.1f}", (int(p_el[0]*w), int(p_el[1]*h)-30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
-                cv2.putText(frame, f"Wr:{angle_wrist:.1f}",    (int(p_wr[0]*w), int(p_wr[1]*h)-30),
+                cv2.putText(frame, f"Wr:{angle_wrist:.1f}", (int(p_wr[0]*w), int(p_wr[1]*h)-30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
-                cv2.putText(frame, f"Hip:{angle_hip:.1f}",     (int(p_hp[0]*w), int(p_hp[1]*h)-10),
+                cv2.putText(frame, f"Hip:{angle_hip:.1f}", (int(p_hp[0]*w), int(p_hp[1]*h)-10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
-                cv2.putText(frame, f"Kn:{angle_knee:.1f}",     (int(p_kn[0]*w), int(p_kn[1]*h)-10),
+                cv2.putText(frame, f"Kn:{angle_knee:.1f}", (int(p_kn[0]*w), int(p_kn[1]*h)-10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
 
                 mp_drawing.draw_landmarks(frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
@@ -153,8 +152,8 @@ for video_file in video_files:
     # ---- 6. Insert into MongoDB ----
     if angle_data:
         result = collection.insert_many(angle_data)
-        print(f" Inserted {len(result.inserted_ids)} records into collection `{player_name}` (video_id `{video_id}`).")
+        print(f"Inserted {len(result.inserted_ids)} records into `{player_name}` (video_id `{video_id}`).")
     else:
-        print(f" No pose data detected for video_id `{video_id}`; nothing was inserted.")
+        print(f"No pose data detected for video_id `{video_id}`; nothing was inserted.")
 
 print(" All videos have been processed.")
