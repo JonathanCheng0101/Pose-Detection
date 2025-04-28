@@ -4,7 +4,6 @@ import os
 import glob
 from dotenv import load_dotenv
 from pymongo import MongoClient
-
 import cv2
 import mediapipe as mp
 import numpy as np
