@@ -83,7 +83,7 @@ Shot-level majority vote yields 70 % accuracy across full clips
 
 Nearest-neighbor returns Top-3 “You shoot like …” recommendations
 
-📦 Installation & Usage
+#📦 Installation & Usage
 ```python
 
 git clone https://github.com/your-org/proclone.git
@@ -101,6 +101,7 @@ pc = ProClone(
 )
 `````
 # Analyze your shot (pass a DataFrame of frames):
+```python
 matches = pc.match_user_shot("Jon", video_frames_df)
 print(matches)
-# → [("Jalen_Green", 95.2), ("Chris_Paul", 94.7), ("Donovan_Mitchell", 93.8)]
+ [("Jalen_Green", 95.2), ("Chris_Paul", 94.7), ("Donovan_Mitchell", 93.8)]
