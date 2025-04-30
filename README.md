@@ -76,14 +76,14 @@ Z-score normalize against NBA dataset
 
 Cosine similarity for nearest-neighbor lookup
 
-4. Inference & Feedback
+### 4. Inference & Feedback
 Residual MLP predicts your top match (90 % frame-level)
 
 Shot-level majority vote yields 70 % accuracy across full clips
 
 Nearest-neighbor returns Top-3 “You shoot like …” recommendations
 
-##📦 Installation & Usage
+## 📦 Installation & Usage
 ```python
 
 git clone https://github.com/your-org/proclone.git
