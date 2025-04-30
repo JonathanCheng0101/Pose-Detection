@@ -68,7 +68,7 @@ def extract_angles(frame: np.ndarray) -> dict:
         "hip":      angle(pts["RIGHT_SHOULDER"], pts["RIGHT_HIP"],      pts["RIGHT_KNEE"]),
         "knee":     angle(pts["RIGHT_HIP"],      pts["RIGHT_KNEE"],     pts["RIGHT_ANKLE"]),
     }
-```python
+`````
 3. Feature Normalization & Matching
 Flatten per-frame angles → 170-D vector
 
@@ -89,7 +89,7 @@ Nearest-neighbor returns Top-3 “You shoot like …” recommendations
 git clone https://github.com/your-org/proclone.git
 cd proclone
 pip install -r requirements.txt
-```python
+`````
 ```python
 
 from proclone import ProClone
@@ -99,7 +99,7 @@ pc = ProClone(
     db_name="pose_db_new",
     n_frames=34
 )
-```python
+`````
 # Analyze your shot (pass a DataFrame of frames):
 matches = pc.match_user_shot("Jon", video_frames_df)
 print(matches)
