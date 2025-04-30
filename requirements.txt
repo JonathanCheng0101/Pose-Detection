@@ -1,4 +1,11 @@
 opencv-python
 mediapipe
-dotenv
+python-dotenv
 pymongo
+pandas
+numpy
+scipy
+scikit-learn
+torch
+matplotlib
+seaborn
