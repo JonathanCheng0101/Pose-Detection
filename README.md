@@ -69,7 +69,7 @@ def extract_angles(frame: np.ndarray) -> dict:
         "knee":     angle(pts["RIGHT_HIP"],      pts["RIGHT_KNEE"],     pts["RIGHT_ANKLE"]),
     }
 `````
-3. Feature Normalization & Matching
+### 3. Feature Normalization & Matching
 Flatten per-frame angles → 170-D vector
 
 Z-score normalize against NBA dataset
@@ -83,7 +83,7 @@ Shot-level majority vote yields 70 % accuracy across full clips
 
 Nearest-neighbor returns Top-3 “You shoot like …” recommendations
 
-#📦 Installation & Usage
+##📦 Installation & Usage
 ```python
 
 git clone https://github.com/your-org/proclone.git
